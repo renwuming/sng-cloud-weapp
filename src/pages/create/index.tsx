@@ -114,6 +114,7 @@ export default class Index extends Component<any, IState> {
 
   submit = async () => {
     const { name, updateTime, levelList } = this.state
+    const createTime = new Date()
     if (!name) {
       Taro.atMessage({
         message: '比赛名称不能为空',
@@ -149,7 +150,8 @@ export default class Index extends Component<any, IState> {
         updateTime,
         levelList,
         sumTime: this.getSumTime(),
-        start: false
+        start: false,
+        createTime
       }
     })
 

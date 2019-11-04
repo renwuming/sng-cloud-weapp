@@ -1,0 +1,13 @@
+// 空列表提示图
+.empty-box {
+  display: flex;
+  height: 800px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #bfbfbf;
+}
+.empty-img {
+  width: 100px;
+  height: 100px;
+}

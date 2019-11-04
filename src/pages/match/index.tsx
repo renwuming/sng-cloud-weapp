@@ -83,6 +83,11 @@ export default class Index extends Component<any, IState> {
     this.setState({
       matchData
     })
+    // 修改title为比赛名
+    const { name } = matchData
+    Taro.setNavigationBarTitle({
+      title: name
+    })
   }
 
   startMatch = async () => {

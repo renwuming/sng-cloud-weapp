@@ -2,6 +2,7 @@
   box-sizing: border-box;
   min-height: 100%;
   padding: 20px;
+  padding-top: 80px;
   padding-bottom: 40px;
 }
 .match-card {
@@ -23,5 +24,15 @@
   position: fixed;
   right: 60px;
   bottom: 100px;
+  z-index: 1000;
+}
+// 顶部吸顶
+.top-tabs {
+  position: fixed;
+  top: 0;
+  left: 2%;
+  width: 96%;
+  padding: 20px 0;
+  background-color: #fff;
   z-index: 1000;
 }
