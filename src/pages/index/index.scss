@@ -1,0 +1,27 @@
+.container {
+  box-sizing: border-box;
+  min-height: 100%;
+  padding: 20px;
+  padding-bottom: 40px;
+}
+.match-card {
+  margin-top: 30px;
+}
+// 浮动按钮
+.add-btn .at-fab {
+  position: fixed;
+  right: 60px;
+  bottom: 240px;
+  z-index: 1000;
+}
+.share-btn .at-button,
+.share-btn button::after {
+  border-width: 0;
+  color: #fff;
+}
+.share-btn .at-fab {
+  position: fixed;
+  right: 60px;
+  bottom: 100px;
+  z-index: 1000;
+}

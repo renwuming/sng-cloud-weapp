@@ -1,0 +1,108 @@
+.container {
+  height: 100%;
+  background-color: #000;
+}
+.line {
+  display: flex;
+}
+.line.main {
+  background-color: #181818;
+}
+.line.warning .timer {
+  color: red;
+}
+.line.next {
+  margin-top: 50px;
+}
+.timer {
+  width: 100%;
+  margin: 180px 0;
+  text-align: center;
+  font-size: 180px;
+  color: #fff;
+}
+.level {
+  width: 100%;
+  margin: 50px 0;
+  text-align: center;
+  font-size: 90px;
+  color: #fff;
+}
+.next-level {
+  margin: 80px 0;
+  font-size: 40px;
+}
+.tip-text {
+  margin: 80px 0;
+  font-size: 30px;
+  color: #666;
+}
+.start-btn {
+  margin: 0 100px;
+  margin-top: 100px;
+  background-color: transparent;
+  color: #4cd964;
+  border-width: 3px;
+  border-color: #4cd964;
+}
+
+// 顶部btn
+.top-line {
+  display: flex;
+  justify-content: flex-end;
+}
+.top-line .at-button {
+  border-width: 0;
+}
+
+// 详细信息
+.at-float-layout .layout-body {
+  padding: 0;
+}
+.info-box {
+  color: #5f646e;
+  background-color: #e7e7e7;
+  padding: 50px 60px;
+  border-bottom: 4px solid #fff;
+}
+.info-box:last-child {
+  border-width: 0;
+}
+.info-box .left {
+  width: 200px;
+}
+.info-box .right {
+  flex: 1;
+  text-align: right;
+  padding-right: 40px;
+}
+.level-line {
+  display: flex;
+  padding: 20px 0;
+}
+.level-line.active {
+  margin: 0 -60px;
+  padding-left: 60px;
+  padding-right: 60px;
+  background-color: #cc8d40;
+  color: #fff;
+}
+.level-line:last-child {
+  border-bottom: 0;
+}
+.level-line text {
+  margin-right: 20px;
+  text-align: left;
+}
+.level-index {
+  width: 150px;
+}
+.sb {
+  width: 200px;
+}
+.bb {
+  width: 200px;
+}
+.ante {
+  width: 150px;
+}

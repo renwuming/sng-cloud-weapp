@@ -1,0 +1,63 @@
+.container {
+  box-sizing: border-box;
+  padding: 20px 0;
+}
+.no-bottom-border.at-input::after {
+  border-bottom: 0;
+}
+.show .at-input--disabled {
+  opacity: 1;
+}
+.form-right {
+  width: 100px;
+}
+
+.title {
+  background-color: #d6e4ef;
+}
+
+.level-list {
+  padding: 0 32px;
+  background-color: #f2f2f2;
+}
+.level-line {
+  display: flex;
+  border-bottom: 1px solid #d6e4ef;
+}
+.level-line:last-child {
+  border-bottom: 0;
+}
+.level-line.top {
+  margin: 0 -32px;
+  padding: 0 32px;
+  background-color: #d6e4ef;
+}
+.level-line text {
+  text-align: center;
+  padding: 24px 0;
+}
+.level {
+  width: 90px;
+}
+.sb {
+  width: 180px;
+}
+.bb {
+  width: 180px;
+}
+.ante {
+  width: 180px;
+}
+.delete-btn {
+  width: 100px;
+}
+
+.sum-time {
+  margin-top: 30px;
+}
+.submit-btn {
+  margin: 0 30px;
+  margin-top: 40px;
+  background-color: #4cd964;
+  border-color: #4cd964;
+}

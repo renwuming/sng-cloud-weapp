@@ -1,0 +1,64 @@
+{
+	"miniprogramRoot": "dist/",
+	"cloudfunctionRoot": "cloudfunctions/",
+	"projectname": "sng",
+	"description": "",
+	"appid": "wxa477914ba8ef4318",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false
+	},
+	"compileType": "miniprogram",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "创建比赛",
+					"pathName": "pages/create/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "match",
+					"pathName": "pages/match/index",
+					"query": "id=96123f8d5dba8b1d036652bb0f66a550",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "match2",
+					"pathName": "pages/match/index",
+					"query": "id=c914be335db717e101d061746eaa89d1",
+					"scene": null
+				}
+			]
+		}
+	}
+}
