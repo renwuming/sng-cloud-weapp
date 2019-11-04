@@ -68,7 +68,7 @@ export default class Index extends Component<any, IState> {
     })
   }
 
-  addBlind = () => {
+  addLevel = () => {
     const { smallBlind, bigBlind, ante, levelList } = this.state
     if (smallBlind <= 0) {
       Taro.atMessage({
@@ -131,7 +131,7 @@ export default class Index extends Component<any, IState> {
     }
     if (levelList.length < 1) {
       Taro.atMessage({
-        message: '至少设置一个盲注级别',
+        message: '至少添加一个盲注级别',
         type: 'warning'
       })
       return
@@ -202,11 +202,7 @@ export default class Index extends Component<any, IState> {
           </AtInput>
         </Picker>
         <AtList className="title">
-          <AtListItem
-            onClick={this.addBlind}
-            title="盲注级别"
-            iconInfo={{ size: 30, color: '#4cd964', value: 'add-circle' }}
-          />
+          <AtListItem title="盲注级别" />
         </AtList>
         <AtInput
           name="smallBlind"
@@ -233,6 +229,14 @@ export default class Index extends Component<any, IState> {
           value={ante}
           onChange={this.handleAnte}
         />
+        <AtButton
+          circle
+          className="add-level-btn"
+          type="secondary"
+          onClick={this.addLevel}
+        >
+          添加盲注级别
+        </AtButton>
         <View className="level-list">
           <View className="level-line top">
             <Text className="level">级别</Text>
