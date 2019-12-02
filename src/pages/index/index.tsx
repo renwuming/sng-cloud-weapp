@@ -108,7 +108,13 @@ export default class Index extends Component<any, IState> {
               );
             })
           ) : (
-            <EmptyTip></EmptyTip>
+            <AtButton
+              type="secondary"
+              className="add-btn2"
+              onClick={this.gotoCreate}
+            >
+              点击此处或右下角 + 添加一个比赛
+            </AtButton>
           ))}
         {tabIndex === 1 &&
           (historyMatchList.length > 0 ? (
