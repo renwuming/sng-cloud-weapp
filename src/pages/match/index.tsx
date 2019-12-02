@@ -90,12 +90,27 @@ export default class Index extends Component<any, IState> {
     this.setState({
       matchData
     });
+    // 加入比赛
+    this.joinMatch(matchData);
     // 修改title为比赛名
     const { name } = matchData;
     Taro.setNavigationBarTitle({
       title: name
     });
   };
+
+  // 加入比赛
+  async joinMatch(matchData) {
+    const { own, _id } = matchData;
+    if (!own) {
+      await CallCloudFunction({
+        name: "joinMatch",
+        data: {
+          id: _id
+        }
+      });
+    }
+  }
 
   startMatch = async () => {
     const { id } = this.$router.params;

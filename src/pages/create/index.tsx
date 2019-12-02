@@ -1,5 +1,5 @@
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text, Picker } from '@tarojs/components'
+import Taro, { Component, Config } from "@tarojs/taro";
+import { View, Text, Picker } from "@tarojs/components";
 import {
   AtInput,
   AtIcon,
@@ -7,156 +7,152 @@ import {
   AtButton,
   AtList,
   AtListItem
-} from 'taro-ui'
-import './index.scss'
-const CLOUD_ENV = process.env.CLOUD_ENV
+} from "taro-ui";
+import "./index.scss";
+import CallCloudFunction from "../../lib/CallCloudFunction";
 
 interface IState {
-  name: string
-  updateTime: number
-  smallBlind: number
-  bigBlind: number
-  ante: number
-  levelList: Level[]
+  name: string;
+  updateTime: number;
+  smallBlind: number;
+  bigBlind: number;
+  ante: number;
+  levelList: Level[];
 }
 
 export default class Index extends Component<any, IState> {
   // 升盲时间list
-  updateTimeList = [5, 10, 15, 20, 25, 30]
+  updateTimeList = [5, 10, 15, 20, 25, 30];
 
   config: Config = {
-    navigationBarTitleText: '创建比赛'
-  }
+    navigationBarTitleText: "创建比赛"
+  };
   state = {
-    name: '',
+    name: "",
     updateTime: 0,
     smallBlind: 0,
     bigBlind: 0,
     ante: 0,
     levelList: []
-  }
+  };
   handlename = value => {
     this.setState({
       name: value
-    })
-    return value
-  }
+    });
+    return value;
+  };
   handleSmallBlind = value => {
     if (isNaN(value)) {
-      return 0
+      return 0;
     }
     this.setState({
       smallBlind: +value,
       bigBlind: value * 2
-    })
-    return value
-  }
+    });
+    return value;
+  };
   handleAnte = value => {
     if (isNaN(value)) {
-      return 0
+      return 0;
     }
     this.setState({
       ante: +value
-    })
-    return value
-  }
+    });
+    return value;
+  };
 
   onUpdateTimeChange = e => {
-    const { updateTimeList } = this
+    const { updateTimeList } = this;
     this.setState({
       updateTime: updateTimeList[e.detail.value]
-    })
-  }
+    });
+  };
 
   addLevel = () => {
-    const { smallBlind, bigBlind, ante, levelList } = this.state
+    const { smallBlind, bigBlind, ante, levelList } = this.state;
     if (smallBlind <= 0) {
       Taro.atMessage({
-        message: '小盲不能为0',
-        type: 'warning'
-      })
-      return
+        message: "小盲不能为0",
+        type: "warning"
+      });
+      return;
     }
-    const level = levelList.length + 1
-    ;(levelList as Array<Level>).push({
+    const level = levelList.length + 1;
+    (levelList as Array<Level>).push({
       level,
       sb: smallBlind,
       bb: bigBlind,
       ante
-    })
+    });
     this.setState({
       levelList
-    })
+    });
     setTimeout(() => {
       this.setState({
         smallBlind: 0,
         bigBlind: 0,
         ante: 0
-      })
-    }, 100)
-  }
+      });
+    }, 100);
+  };
 
   getSumTime = () => {
-    const { updateTime, levelList } = this.state
-    return updateTime * levelList.length
-  }
+    const { updateTime, levelList } = this.state;
+    return updateTime * levelList.length;
+  };
 
   deleteLevel = index => {
-    const { levelList } = this.state
-    levelList.splice(index, 1)
+    const { levelList } = this.state;
+    levelList.splice(index, 1);
     levelList.forEach((item, index) => {
-      ;(item as Level).level = index + 1
-    })
+      (item as Level).level = index + 1;
+    });
     this.setState({
       levelList
-    })
-  }
+    });
+  };
 
   submit = async () => {
-    const { name, updateTime, levelList } = this.state
-    const createTime = new Date()
+    const { name, updateTime, levelList } = this.state;
+    const createTime = new Date();
     if (!name) {
       Taro.atMessage({
-        message: '比赛名称不能为空',
-        type: 'warning'
-      })
-      return
+        message: "比赛名称不能为空",
+        type: "warning"
+      });
+      return;
     }
     if (updateTime <= 0) {
       Taro.atMessage({
-        message: '升盲时间不能为0',
-        type: 'warning'
-      })
-      return
+        message: "升盲时间不能为0",
+        type: "warning"
+      });
+      return;
     }
     if (levelList.length < 1) {
       Taro.atMessage({
-        message: '至少添加一个盲注级别',
-        type: 'warning'
-      })
-      return
+        message: "至少添加一个盲注级别",
+        type: "warning"
+      });
+      return;
     }
-    // 插入数据库
-    Taro.cloud.init({
-      env: CLOUD_ENV
-    })
-    const db = Taro.cloud.database({
-      env: CLOUD_ENV
-    })
-    const matches = db.collection('matches')
-    await matches.add({
+    // 创建比赛
+    await CallCloudFunction({
+      name: "createMatch",
       data: {
-        name,
-        updateTime,
-        levelList,
-        sumTime: this.getSumTime(),
-        start: false,
-        createTime
+        match: {
+          name,
+          updateTime,
+          levelList,
+          sumTime: this.getSumTime(),
+          start: false,
+          createTime
+        }
       }
-    })
+    });
 
-    Taro.navigateBack()
-  }
+    Taro.navigateBack();
+  };
 
   render() {
     const {
@@ -166,8 +162,8 @@ export default class Index extends Component<any, IState> {
       bigBlind,
       ante,
       levelList
-    } = this.state
-    const { updateTimeList } = this
+    } = this.state;
+    const { updateTimeList } = this;
     return (
       <View className="container">
         <AtMessage />
@@ -246,7 +242,7 @@ export default class Index extends Component<any, IState> {
             <Text className="delete-btn"></Text>
           </View>
           {levelList.map((item, index) => {
-            const { level, sb, bb } = item
+            const { level, sb, bb } = item;
             return (
               <View className="level-line">
                 <Text className="level">({level})</Text>
@@ -261,7 +257,7 @@ export default class Index extends Component<any, IState> {
                   color="#D81E06"
                 ></AtIcon>
               </View>
-            )
+            );
           })}
         </View>
         <AtList className="title sum-time">
@@ -280,6 +276,6 @@ export default class Index extends Component<any, IState> {
           创建比赛
         </AtButton>
       </View>
-    )
+    );
   }
 }

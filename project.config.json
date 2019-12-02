@@ -48,14 +48,14 @@
 					"id": 1,
 					"name": "match",
 					"pathName": "pages/match/index",
-					"query": "id=96123f8d5dba8b1d036652bb0f66a550",
+					"query": "id=00a6cea35dbfca030149673604073348",
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "match2",
 					"pathName": "pages/match/index",
-					"query": "id=c914be335db717e101d061746eaa89d1",
+					"query": "id=114f807c5de47c990122b4e64e6c964a",
 					"scene": null
 				}
 			]
