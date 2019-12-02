@@ -86,7 +86,7 @@ export default class Index extends Component<any, IState> {
               return (
                 <AtCard
                   onClick={this.gotoMatch.bind(null, _id)}
-                  className="match-card"
+                  className={`match-card ${start ? "start" : ""}`}
                   extra={`${sumTime}分钟`}
                   note={own ? "我创建的" : "我参与的"}
                   title={name}
@@ -127,7 +127,7 @@ export default class Index extends Component<any, IState> {
                 <View>
                   <AtCard
                     onClick={this.gotoMatch.bind(null, _id)}
-                    className="match-card"
+                    className="match-card end"
                     extra={`${sumTime}分钟`}
                     note={own ? "我创建的" : "我参与的"}
                     title={name}

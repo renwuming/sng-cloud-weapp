@@ -36,3 +36,10 @@
   background-color: #fff;
   z-index: 1000;
 }
+// 卡片样式
+.match-card.start .at-card__header {
+  background-color: #d6e4ef;
+}
+.match-card.end .at-card__header {
+  background-color: #ddd;
+}
