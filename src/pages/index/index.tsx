@@ -113,7 +113,7 @@ export default class Index extends Component<any, IState> {
               className="add-btn2"
               onClick={this.gotoCreate}
             >
-              点击此处或右下角 + 添加一个比赛
+              点击此处或右下角 + 创建一个比赛
             </AtButton>
           ))}
         {tabIndex === 1 &&
