@@ -78,6 +78,10 @@ export default class Index extends Component<any, IState> {
     clearInterval(this.countTimer);
     clearInterval(this.initTimer);
   }
+  componentWillUnmount() {
+    clearInterval(this.countTimer);
+    clearInterval(this.initTimer);
+  }
 
   initData = async () => {
     const { id } = this.$router.params;
