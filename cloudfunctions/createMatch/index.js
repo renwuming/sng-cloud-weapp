@@ -9,13 +9,12 @@ exports.main = async (event, context) => {
   });
   const db = cloud.database();
 
-  await db.collection("matches").add({
+  const res = await db.collection("matches").add({
     data: {
       ...match,
-      _openid: OPENID,
       players: [OPENID]
     }
-  });
+  })
 
-  return null;
+  return res;
 };

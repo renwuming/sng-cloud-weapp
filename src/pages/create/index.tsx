@@ -6,7 +6,8 @@ import {
   AtMessage,
   AtButton,
   AtList,
-  AtListItem
+  AtListItem,
+  AtSwitch,
 } from "taro-ui";
 import "./index.scss";
 import CallCloudFunction from "../../lib/CallCloudFunction";
@@ -18,6 +19,7 @@ interface IState {
   bigBlind: number;
   ante: number;
   levelList: Level[];
+  sameBB: boolean;
 }
 
 export default class Index extends Component<any, IState> {
@@ -25,7 +27,7 @@ export default class Index extends Component<any, IState> {
   updateTimeList = [5, 10, 15, 20, 25, 30];
 
   config: Config = {
-    navigationBarTitleText: "创建比赛"
+    navigationBarTitleText: "创建比赛",
   };
   state = {
     name: "",
@@ -33,38 +35,40 @@ export default class Index extends Component<any, IState> {
     smallBlind: 0,
     bigBlind: 0,
     ante: 0,
-    levelList: []
+    levelList: [],
+    sameBB: false,
   };
-  handlename = value => {
+  handlename = (value) => {
     this.setState({
-      name: value
+      name: value,
     });
     return value;
   };
-  handleSmallBlind = value => {
+  handleSmallBlind = (value) => {
     if (isNaN(value)) {
       return 0;
     }
+    const { sameBB } = this.state;
     this.setState({
       smallBlind: +value,
-      bigBlind: value * 2
+      bigBlind: sameBB ? value : value * 2,
     });
     return value;
   };
-  handleAnte = value => {
+  handleAnte = (value) => {
     if (isNaN(value)) {
       return 0;
     }
     this.setState({
-      ante: +value
+      ante: +value,
     });
     return value;
   };
 
-  onUpdateTimeChange = e => {
+  onUpdateTimeChange = (e) => {
     const { updateTimeList } = this;
     this.setState({
-      updateTime: updateTimeList[e.detail.value]
+      updateTime: updateTimeList[e.detail.value],
     });
   };
 
@@ -73,7 +77,7 @@ export default class Index extends Component<any, IState> {
     if (smallBlind <= 0) {
       Taro.atMessage({
         message: "小盲不能为0",
-        type: "warning"
+        type: "warning",
       });
       return;
     }
@@ -82,16 +86,16 @@ export default class Index extends Component<any, IState> {
       level,
       sb: smallBlind,
       bb: bigBlind,
-      ante
+      ante,
     });
     this.setState({
-      levelList
+      levelList,
     });
     setTimeout(() => {
       this.setState({
         smallBlind: 0,
         bigBlind: 0,
-        ante: 0
+        ante: 0,
       });
     }, 100);
   };
@@ -101,14 +105,14 @@ export default class Index extends Component<any, IState> {
     return updateTime * levelList.length;
   };
 
-  deleteLevel = index => {
+  deleteLevel = (index) => {
     const { levelList } = this.state;
     levelList.splice(index, 1);
     levelList.forEach((item, index) => {
       (item as Level).level = index + 1;
     });
     this.setState({
-      levelList
+      levelList,
     });
   };
 
@@ -118,21 +122,21 @@ export default class Index extends Component<any, IState> {
     if (!name) {
       Taro.atMessage({
         message: "比赛名称不能为空",
-        type: "warning"
+        type: "warning",
       });
       return;
     }
     if (updateTime <= 0) {
       Taro.atMessage({
         message: "升盲时间不能为0",
-        type: "warning"
+        type: "warning",
       });
       return;
     }
     if (levelList.length < 1) {
       Taro.atMessage({
         message: "至少添加一个盲注级别",
-        type: "warning"
+        type: "warning",
       });
       return;
     }
@@ -146,9 +150,9 @@ export default class Index extends Component<any, IState> {
           levelList,
           sumTime: this.getSumTime(),
           start: false,
-          createTime
-        }
-      }
+          createTime,
+        },
+      },
     });
 
     Taro.navigateBack();
@@ -161,7 +165,8 @@ export default class Index extends Component<any, IState> {
       smallBlind,
       bigBlind,
       ante,
-      levelList
+      levelList,
+      sameBB,
     } = this.state;
     const { updateTimeList } = this;
     return (
@@ -215,6 +220,20 @@ export default class Index extends Component<any, IState> {
           type="number"
           value={bigBlind}
           onChange={() => {}}
+        ></AtInput>
+        <AtSwitch
+          className="form-right2"
+          title="大盲与小盲相同"
+          checked={sameBB}
+          onChange={() => {
+            const { smallBlind } = this.state;
+            const newSameBB = !sameBB;
+            const bigBlind = newSameBB ? smallBlind : smallBlind * 2;
+            this.setState({
+              sameBB: !sameBB,
+              bigBlind,
+            });
+          }}
         />
         <AtInput
           className="no-bottom-border"
