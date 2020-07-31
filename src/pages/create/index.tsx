@@ -158,6 +158,85 @@ export default class Index extends Component<any, IState> {
     Taro.navigateBack();
   };
 
+  setJulebuLevel = () => {
+    this.setState({
+      levelList: [
+        {
+          ante: 0,
+          bb: 100,
+          sb: 100,
+          level: 1,
+        },
+        {
+          ante: 0,
+          bb: 200,
+          sb: 100,
+          level: 2,
+        },
+        {
+          ante: 0,
+          bb: 400,
+          sb: 200,
+          level: 3,
+        },
+        {
+          ante: 0,
+          bb: 600,
+          sb: 300,
+          level: 4,
+        },
+        {
+          ante: 0,
+          bb: 800,
+          sb: 400,
+          level: 5,
+        },
+        {
+          ante: 0,
+          bb: 1000,
+          sb: 500,
+          level: 6,
+        },
+        {
+          ante: 0,
+          bb: 1500,
+          sb: 800,
+          level: 7,
+        },
+        {
+          ante: 0,
+          bb: 2000,
+          sb: 1000,
+          level: 8,
+        },
+        {
+          ante: 0,
+          bb: 3000,
+          sb: 1500,
+          level: 9,
+        },
+        {
+          ante: 0,
+          bb: 4000,
+          sb: 2000,
+          level: 10,
+        },
+        {
+          ante: 0,
+          bb: 6000,
+          sb: 3000,
+          level: 11,
+        },
+        {
+          ante: 0,
+          bb: 10000,
+          sb: 5000,
+          level: 12,
+        },
+      ],
+    });
+  };
+
   render() {
     const {
       name,
@@ -279,6 +358,16 @@ export default class Index extends Component<any, IState> {
             );
           })}
         </View>
+        {levelList.length <= 0 && (
+          <AtButton
+            circle
+            className="add-level-btn m-t"
+            type="secondary"
+            onClick={this.setJulebuLevel}
+          >
+            使用俱乐部盲注模板
+          </AtButton>
+        )}
         <AtList className="title sum-time">
           <AtListItem
             title="比赛总时长"
